@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../bower_components/paper-styles/paper-styles.html">
+
+
+<script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+
+<dom-module id="create-list">
+	<template>
+		<style>
+			:host {
+				display: block;
+			}
+		</style>
+		<h1>Crear super lista</h1>
+		<paper-input id="name" label="Input label"></paper-input>
+		<paper-button on-click="createList" raised>Create</paper-button>
+	</template>
+	<script>
+		Polymer({
+			is: 'create-list',
+			createList: function() {
+		        var listas = new Firebase("https://listapp2.firebaseio.com/listas/");
+
+		        listas.push({
+				  name: this.$.name.value
+				});
+
+				this.fire('pincho-boton');
+
+		      }
+
+		});
+	</script>
+</dom-module>
